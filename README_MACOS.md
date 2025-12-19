@@ -66,6 +66,19 @@ echo 'export UV_DEFAULT_INDEX="https://pypi.tuna.tsinghua.edu.cn/simple"'>> ~/.z
 ```
 初始化项目：uv init
 
+### uv项目开始
+### 创建激活虚拟环境
+```
+1.创建虚拟环境
+python -m venv venv
+2.激活虚拟环境
+windows
+.\venv\Scripts\activate
+macOs
+source venv/bin/activate
+3.退出虚拟环境
+deactivate
+```
 ## 安装python
 1. 通过uv安装 uv python install ${版本}
 2. 通过homebrew安装 brew install python@版本
@@ -94,6 +107,7 @@ git config --global user.name xxx
 npm config set registry https://registry.npmmirror.com
 ```
 
+
 ## 安装term2
 brew install --cask iterm2
 iTerm2 主题设置
@@ -112,33 +126,69 @@ iTerm2 主题设置
 $ sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 * 配置zshrc文件
 ```
+# If you come from bash you might have to change your $PATH.
+# export PATH=$HOME/bin:/usr/local/bin:$PATH
+
+# Path to your oh-my-zsh installation.
+export ZSH="/Users/wangwei/.oh-my-zsh"
+
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
 ZSH_THEME="ys"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
+
+# ===== 补全配置（必须在 oh-my-zsh 之前）=====
+# zsh配置
+# --- 补全样式设置 ---
+zmodload zsh/complist
+# 开启菜单选择模式
+zstyle ':completion:*' menu select
+# 其他有用的补全设置
+zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}' 'r:[^[:alpha:]]||[[:alpha:]]=** r:|=* m:{a-zA-Z}={A-Za-z}' 'r:|=? m:{a-zA-Z}={A-Za-z}'
+# 禁用补全不到的哔哔声
+# setopt NO_BEEP
+# --- 关键：解决询问问题 ---
+setopt AUTO_LIST
+# 补全到 命令行，并同时立即弹出候选列表
+setopt NO_LIST_AMBIGUOUS
+export LISTMAX=0
+
+# Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
-    git zsh-syntax-highlighting zsh-autosuggestions zsh-autocomplete
+    git zsh-syntax-highlighting zsh-autosuggestions
 )
-#plugins
-## auto suggestions
-if type brew &>/dev/null; then
-    FPATH=$(brew --prefix)/share/zsh-completions:$FPATH
-
-    autoload -Uz compinit
-    compinit
-fi
-## auto suggestions
-#plugins
+# zsh-autocomplete：这个插件会自动在后台运行 ls 或补全查询。当你输入 c 时，它会瞬间找到系统中成百上千个以 c 开头的命令。
+# 暂时关闭这个插件
 source $ZSH/oh-my-zsh.sh
+
+# 修正 autosuggestions 的颜色（如果颜色太亮看不清）
+ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=242'
 
 # 使我配置的别名 配置变量生效
 test -f ~/.bash_aliases && source ~/.bash_aliases
+# homebrew 禁用自动升级
+export HOMEBREW_NO_AUTO_UPDATE=1
 # 管道 自动涂色
 alias grep=grep --color=auto
+
+# 命令行bin导入
+export PATH="/usr/local/sbin:$PATH"
+
+# python uv默认使用python版本
+export UV_PYTHON=3.13.4
+
+# alias
+alias ll='eza -abghHliS'
+
+# HomeBrew
+export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.ustc.edu.cn/homebrew-bottles
+export PATH="/opt/homebrew/bin:$PATH"
+export PATH="/opt/homebrew/sbin:$PATH"
+# HomeBrew
 ```
 
 
@@ -177,6 +227,25 @@ wire_api = "chat"
         "ANTHROPIC_BASE_URL": "${API模型访问地址，可以是openrouter}$",
         "ANTHROPIC_MODEL": "GLM-4.5",
         "ANTHROPIC_SMALL_FAST_MODEL": "GLM-4.5"
+    }
+}
+```
+3.添加全局mcp server配置，配置文件路径为~/.claude.json,配置文件如下
+```
+{
+    "mcpServers": {
+        "pokemon": {
+            "disable": false,
+            "timeout": 60,
+            "command": "uv",
+            "args": [
+                    "--directory", 
+                    "~/project/personel/pokemon_mcp", 
+                    "run", 
+                    "pokemon_mcp.py"
+                ],
+            "env": {}
+        }
     }
 }
 ```
