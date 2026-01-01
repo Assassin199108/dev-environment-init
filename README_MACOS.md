@@ -65,6 +65,7 @@ echo 'export UV_DEFAULT_INDEX="https://pypi.tuna.tsinghua.edu.cn/simple"'>> ~/.z
 # echo 'export UV_DEFAULT_INDEX="https://mirrors.aliyun.com/pypi/simple/"' >> ~/.zshrc
 ```
 初始化项目：uv init
+uv项目安装依赖：uv sync
 
 ### uv项目开始
 ### 创建激活虚拟环境
@@ -106,6 +107,19 @@ git config --global user.name xxx
 ```
 npm config set registry https://registry.npmmirror.com
 ```
+3. node设置本地三方依赖仓库路径
+```
+npm config set prefix ${path}
+```
+4. 常用的三方依赖
+```
+@anthropic-ai/claude-code
+@google/gemini-cli
+@musistudio/claude-code-router
+@openai/codex
+@modelcontextprotocol/inspector
+```
+5. 可通过npx运行服务，例如npx @modelcontextprotocol/inspector uv run python_tool/project_mcp/dag/dag_manage_mcp.py
 
 
 ## 安装term2
@@ -249,3 +263,23 @@ wire_api = "chat"
     }
 }
 ```
+4.添加项目维度mcp server配置，配置文件路径为{{project_dir}}/.mcp.json
+```
+{
+  "mcpServers": {
+    "evo.rec.dag.manage": {
+      "command": "uv",
+      "args": [
+        "--directory",
+        "./project_mcp/dag",
+        "--isolated",
+        "run",
+        "dag_manage_mcp.py"
+      ]
+    }
+  }
+}
+```
+
+## mcp server
+通过mcp dev {{具体mcp server}}可以测试mcp 连接
