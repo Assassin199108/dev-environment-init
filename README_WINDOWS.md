@@ -1,4 +1,7 @@
 # 初始化项目
+# 下载powershell
+通过windows自带商店mircosoft store下载，搜索powershell即可
+
 # 配置powershell
 ```
 # 允许运行Install-Module脚本

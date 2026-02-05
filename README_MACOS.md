@@ -1,7 +1,7 @@
 
 # ⚙️ Mac基础依赖
 ## Homebrew 包管理工具
-1. <a ref="/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"">安装</a>
+1. <a ref="/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"">安装</a>(如果 安装不了 直接通过​/bin/zsh -c "$(curl -fsSL https://gitee.com/cunkai/HomebrewCN/raw/master/Homebrew.sh)" 国内镜像安装)
 2. 配置镜像 
 ```# brew设置清华镜像源：
 echo '# brew设置清华镜像源：\nexport HOMEBREW_API_DOMAIN="https://mirrors.tuna.tsinghua.edu.cn/homebrew-bottles/api"\nexport HOMEBREW_BOTTLE_DOMAIN="https://mirrors.tuna.tsinghua.edu.cn/homebrew-bottles"\nexport HOMEBREW_BREW_GIT_REMOTE="https://mirrors.tuna.tsinghua.edu.cn/git/homebrew/brew.git"\nexport HOMEBREW_CORE_GIT_REMOTE="https://mirrors.tuna.tsinghua.edu.cn/git/homebrew/homebrew-core.git"\nexport HOMEBREW_PIP_INDEX_URL="https://pypi.tuna.tsinghua.edu.cn/simple"\n# brew设置清华镜像源\n' >> ~/.zshrc
@@ -24,103 +24,6 @@ export PATH="/opt/homebrew/sbin:$PATH"
 5. 删除自建的tap
     a. brew untap ${tap}
 ```
-
-### 🔧 我最常用的第三方包
-* bat
-    * cat命令增强版本
-* eza
-    * ls命令增加器
-* glances、htop
-    * top命令增强器
-* jq
-    * 命令行json处理器
-* jsonpp
-    * 命令行 JSON 格式化打印器
-* telnet
-    * 远端登入
-* tldr
-    * 快速查阅命令 too long don't read
-* tree
-    * 谁用谁知道
-* wget
-    * 单线程下载
-* xz
-    * 压缩命令行
-* zsh
-    * 终端命令行解释器
-* zsh-completions
-    * zsh终端命令补全脚本
-* zsh-syntax-highlighting
-    * 命令预发校验插件
-
-## 安装uv
-什么是uv： python包管理
-```
-1. 安装uv 
-pip install uv
-MacOs
-# 清华源
-echo 'export UV_DEFAULT_INDEX="https://pypi.tuna.tsinghua.edu.cn/simple"'>> ~/.zshrc
-# 阿里源
-# echo 'export UV_DEFAULT_INDEX="https://mirrors.aliyun.com/pypi/simple/"' >> ~/.zshrc
-```
-初始化项目：uv init
-uv项目安装依赖：uv sync
-
-### uv项目开始
-### 创建激活虚拟环境
-```
-1.创建虚拟环境
-python -m venv venv
-2.激活虚拟环境
-windows
-.\venv\Scripts\activate
-macOs
-source venv/bin/activate
-3.退出虚拟环境
-deactivate
-```
-## 安装python
-1. 通过uv安装 uv python install ${版本}
-2. 通过homebrew安装 brew install python@版本
-3. 通过npm安装 npm install -g python@版本
-4. 配置pip源
-```
-pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple --user
-pip config set global.proxy http://127.0.0.1:<端口号> --user
-```
-
-## 安装git
-1. 通过homebrew安装 brew install git
-2. 配置git信息
-```
-git config --global user.email xxx
-git config --global user.name xxx
-```
-
-## 安装nvm
-1. 通过homebrew安装 brew install nvm
-
-## 安装node
-1. 通过nvm安装node nvm install 8.0.0
-2. npm 换源
-```
-npm config set registry https://registry.npmmirror.com
-```
-3. node设置本地三方依赖仓库路径
-```
-npm config set prefix ${path}
-```
-4. 常用的三方依赖
-```
-@anthropic-ai/claude-code
-@google/gemini-cli
-@musistudio/claude-code-router
-@openai/codex
-@modelcontextprotocol/inspector
-```
-5. 可通过npx运行服务，例如npx @modelcontextprotocol/inspector uv run python_tool/project_mcp/dag/dag_manage_mcp.py
-
 
 ## 安装term2
 brew install --cask iterm2
@@ -205,6 +108,105 @@ export PATH="/opt/homebrew/sbin:$PATH"
 # HomeBrew
 ```
 
+### 🔧 我最常用的第三方包
+* bat
+    * cat命令增强版本
+* eza
+    * ls命令增加器
+* glances、htop
+    * top命令增强器
+* jq
+    * 命令行json处理器
+* jsonpp
+    * 命令行 JSON 格式化打印器
+* telnet
+    * 远端登入
+* tldr
+    * 快速查阅命令 too long don't read
+* tree
+    * 谁用谁知道
+* wget
+    * 单线程下载
+* xz
+    * 压缩命令行
+* zsh
+    * 终端命令行解释器
+* zsh-completions
+    * zsh终端命令补全脚本
+* zsh-syntax-highlighting
+    * 命令预发校验插件
+* alfred
+    * 最好用的查找器
+    * 安装方式brew install alfred --cask
+
+## 安装uv
+什么是uv： python包管理
+```
+1. 安装uv 
+pip install uv
+MacOs
+# 清华源
+echo 'export UV_DEFAULT_INDEX="https://pypi.tuna.tsinghua.edu.cn/simple"'>> ~/.zshrc
+# 阿里源
+# echo 'export UV_DEFAULT_INDEX="https://mirrors.aliyun.com/pypi/simple/"' >> ~/.zshrc
+```
+初始化项目：uv init
+uv项目安装依赖：uv sync
+
+### uv项目开始
+### 创建激活虚拟环境
+```
+1.创建虚拟环境
+python -m venv venv
+2.激活虚拟环境
+windows
+.\venv\Scripts\activate
+macOs
+source venv/bin/activate
+3.退出虚拟环境
+deactivate
+```
+## 安装python
+1. 通过uv安装 uv python install ${版本}
+2. 通过homebrew安装 brew install python@版本
+3. 通过npm安装 npm install -g python@版本
+4. 配置pip源
+```
+pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple --user
+pip config set global.proxy http://127.0.0.1:<端口号> --user
+```
+
+## 安装git
+1. 通过homebrew安装 brew install git
+2. 配置git信息
+```
+git config --global user.email xxx
+git config --global user.name xxx
+```
+
+## 安装nvm
+1. 通过homebrew安装 brew install nvm
+
+## 安装node
+1. 通过nvm安装node nvm install 8.0.0
+2. npm 换源
+```
+npm config set registry https://registry.npmmirror.com
+```
+3. node设置本地三方依赖仓库路径
+```
+npm config set prefix ${path}
+```
+4. 常用的三方依赖
+```
+@anthropic-ai/claude-code
+@google/gemini-cli
+@musistudio/claude-code-router
+@openai/codex
+@modelcontextprotocol/inspector
+```
+5. 可通过npx运行服务，例如npx @modelcontextprotocol/inspector uv run python_tool/project_mcp/dag/dag_manage_mcp.py
+
 
 # 🚀 Vibe Coding
 ## gemini-cli
@@ -280,6 +282,30 @@ wire_api = "chat"
   }
 }
 ```
+5.功能拓展
+```
+输出样式：/output-style：可选择默认、解释型人格、学习
+think模式：think hard/think more/think a lot/think longer/think/ultrathink
+
+```
+## opencode
+1.通过npm 安装open code: npm install -g opencode-ai
+2.通过npm 按照oh-my-opencode: npm install -g oh-my-opencod
+3.配置opencode信息及API KEY
+- 配置opencode信息: vim ~/.config/opencode/opencode.json
+    - 可配置模型、权限、agents
+    - 具体可参考官方文档 https://opencode.ai/docs/models/
+- 配置opencode API KEY: vim ~/.local/share/opencode/auth.json格式如下
+```
+{
+  "{{具体模型提供方 例如openrouter}}": {
+    "type": "api",
+    "key": "{{API_KEY}}"
+  }
+}
+```
+- 配置oh-my-opencode信息: vim ~/.config/opencode/oh-my-opencode.json
+    - 配置信息可参考官网
 
 ## mcp server
 通过mcp dev {{具体mcp server}}可以测试mcp 连接
