@@ -25,6 +25,60 @@ export PATH="/opt/homebrew/sbin:$PATH"
     a. brew untap ${tap}
 ```
 
+## vim设置
+```
+" Configuration file for vim
+set modelines=0" CVE-2007-2438
+
+" Normally we use vim-extensions. If you want true vi-compatibility
+" remove change the following statements
+set nocompatible" Use Vim defaults instead of 100% vi compatibility
+set backspace=2" more powerful backspacing
+
+" Don't write backup file if vim is being called by "crontab -e"
+au BufWrite /private/tmp/crontab.* set nowritebackup nobackup
+" Don't write backup file if vim is being called by "chpass"
+au BufWrite /private/etc/pw.* set nowritebackup nobackup
+
+let skip_defaults_vim=1
+" checkout the character and show different color character of keyword
+" --- 视觉设置 ---
+syntax on
+set t_Co=256
+colorscheme desert
+set cursorline
+" 每一行最前面的行号
+set nu
+
+" --- 缩进与空格 ---
+set autoindent
+set tabstop=4
+set shiftwidth=4
+set expandtab
+
+" show specified backgroup color(bu it do's work)
+set bg=dark
+
+" --- 搜索与交互 ---
+" 高亮度反白
+set hlsearch
+set incsearch
+set ignorecase
+set smartcase
+
+" --- 编码设置 ---
+set encoding=utf-8
+
+" 用退格键删除
+set backspace=2
+
+" 显示最后一行的状态
+set ruler
+
+" 左下角那一行的状态
+set showmode
+```
+
 ## 安装term2
 brew install --cask iterm2
 iTerm2 主题设置
@@ -36,11 +90,15 @@ iTerm2 主题设置
     * 入口
     ![入口](img/iterm2/key%20bindings.png)
     * new Tab with "Default" Profile  command+n
+4. 设置vim上下鼠标模式滚动
+    ![滚动设置](img/iterm2/iterm2%20scorll.png)
 
 ## zsh + oh my zsh
 * brew install zsh
-* curl
-$ sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+* sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+* cd ~/.oh-my-zsh/custom/plugins
+    * git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+    * git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 * 配置zshrc文件
 ```
 # If you come from bash you might have to change your $PATH.
@@ -138,6 +196,7 @@ export PATH="/opt/homebrew/sbin:$PATH"
 * alfred
     * 最好用的查找器
     * 安装方式brew install alfred --cask
+* uv
 
 ## 安装uv
 什么是uv： python包管理
@@ -186,6 +245,9 @@ git config --global user.name xxx
 
 ## 安装nvm
 1. 通过homebrew安装 brew install nvm
+2. 安装后可能会报找不到nvm命令
+3. 需要brew info nvm
+4. 按照提升添加nvm目录到.zshrc
 
 ## 安装node
 1. 通过nvm安装node nvm install 8.0.0
@@ -200,10 +262,15 @@ npm config set prefix ${path}
 4. 常用的三方依赖
 ```
 @anthropic-ai/claude-code
+@fission-ai/openspec
 @google/gemini-cli
+@iflow-ai/iflow-cli
+@modelcontextprotocol/inspector
 @musistudio/claude-code-router
 @openai/codex
-@modelcontextprotocol/inspector
+opencode-ai
+oh-my-opencode
+openclaw
 ```
 5. 可通过npx运行服务，例如npx @modelcontextprotocol/inspector uv run python_tool/project_mcp/dag/dag_manage_mcp.py
 
