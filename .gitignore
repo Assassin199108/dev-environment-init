@@ -208,3 +208,8 @@ __marimo__/
 
 
 .history/
+
+.claude/
+.iflow/
+.opencode/
+openspec/

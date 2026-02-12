@@ -208,6 +208,62 @@ npm config set prefix ${path}
 5. 可通过npx运行服务，例如npx @modelcontextprotocol/inspector uv run python_tool/project_mcp/dag/dag_manage_mcp.py
 
 
+# 🚀 快速安装
+
+## 一键安装 Claude Code 和 OpenSpec
+
+本项目提供了一个自动化安装脚本，可以快速在 macOS 上安装和配置 Claude Code 和 OpenSpec。
+
+### 使用方法
+
+```bash
+# 运行安装脚本
+./scripts/install-macos-cc-openspec.sh
+```
+
+### 脚本功能
+
+- ✅ 自动安装 Homebrew（如果未安装）
+- ✅ 自动安装 Node.js 和 npm（如果未安装）
+- ✅ 自动安装 claude-code 和 openspec-cli
+- ✅ 交互式配置 Claude Code 的 API Token 和模型
+- ✅ 支持国内镜像（Homebrew）
+- ✅ 自动检测并适配用户使用的 shell（zsh/bash/fish）
+- ✅ 配置文件自动备份
+
+### 安装前准备
+
+确保您有以下信息：
+
+1. **Claude API Token** - 从 [Anthropic Console](https://console.anthropic.com/) 获取
+2. **网络连接** - 确保可以访问互联网（或使用代理）
+
+### 安装步骤
+
+1. 克隆或下载本项目
+2. 运行安装脚本
+3. 按照提示输入 API Token 和模型信息
+4. 等待安装完成
+
+### 验证安装
+
+```bash
+# 验证 Claude Code
+claude --version
+
+# 验证 OpenSpec
+openspec list
+
+# 启动 Claude Code
+claude
+```
+
+### 手动配置（备选方案）
+
+如果您更喜欢手动配置，请参考下方的"Vibe Coding"章节。
+
+---
+
 # 🚀 Vibe Coding
 ## gemini-cli
 1. 通过npm 安装gemini: npm install -g @google/gemini-cli
@@ -309,3 +365,208 @@ think模式：think hard/think more/think a lot/think longer/think/ultrathink
 
 ## mcp server
 通过mcp dev {{具体mcp server}}可以测试mcp 连接
+
+
+## openspec
+通过npm -g install @fission-ai/openspec下载openspec
+- 进入对应项目路径
+- 运行openspec init 初始化openspec能力
+- 选择你运行的AI Coding Agent
+- Copy下面Prompt到AI Coding Agent对话窗口
+```
+1. Populate your project context:
+   "Please read openspec/project.md and help me fill it out
+    with details about my project, tech stack, and conventions"
+
+2. Create your first change proposal:
+   "I want to add [YOUR FEATURE HERE]. Please create an
+    OpenSpec change proposal for this feature"
+
+3. Learn the OpenSpec workflow:
+   "Please explain the OpenSpec workflow from openspec/AGENTS.md
+    and how I should work with you on this project"
+```
+- 后续即可使用
+
+
+---
+
+# ❓ 常见问题解答 (FAQ)
+
+## 快速安装相关问题
+
+### Q1: 如何获取 Claude API Token？
+
+**A:** 访问 [Anthropic Console](https://console.anthropic.com/)，登录或注册账号，然后在 API Keys 部分创建新的 API Token。
+
+### Q2: 如何选择合适的模型？
+
+**A:** 推荐使用以下模型：
+- **claude-sonnet-4-20250514** - 最新版本，性能最佳（推荐）
+- **claude-3-5-sonnet-20241022** - 稳定版本
+- **claude-3-5-haiku-20241022** - 快速响应，适合简单任务
+
+### Q3: 安装失败怎么办？
+
+**A:** 常见问题和解决方案：
+
+1. **网络问题**
+   - 检查网络连接
+   - 考虑使用代理
+   - 选择国内镜像安装 Homebrew
+
+2. **权限问题**
+   - 确保您有足够的权限
+   - 尝试使用 sudo（不推荐）
+
+3. **Homebrew 安装失败**
+   - 尝试使用国内镜像
+   - 手动安装 Homebrew: https://brew.sh/
+
+4. **npm 安装失败**
+   - 检查 npm 源配置
+   - 尝试使用国内镜像: `npm config set registry https://registry.npmmirror.com`
+
+### Q4: 如何更新配置？
+
+**A:** 编辑配置文件：
+```bash
+# 编辑 Claude Code 配置
+vim ~/.claude/settings.json
+
+# 修改后重新启动 Claude Code
+claude
+```
+
+### Q5: 如何卸载？
+
+**A:** 手动卸载步骤：
+
+```bash
+# 卸载 claude-code
+npm uninstall -g @anthropic-ai/claude-code
+
+# 卸载 openspec-cli
+npm uninstall -g openspec-cli
+
+# 删除配置文件
+rm -rf ~/.claude
+
+# （可选）卸载 Node.js 和 Homebrew
+# 注意：这可能会影响其他依赖 Node.js 的应用
+```
+
+### Q6: 脚本支持哪些 shell？
+
+**A:** 脚本支持以下 shell：
+- **zsh** - macOS Catalina 及以后默认
+- **bash** - 旧版本 macOS 默认
+- **fish** - 现代化 shell
+- **其他** - 会提示手动配置
+
+脚本会自动检测您使用的 shell，并将 Homebrew 添加到对应的配置文件。
+
+### Q7: 安装后需要做什么？
+
+**A:** 安装完成后：
+
+1. **使配置生效**
+   ```bash
+   # 如果您安装了 Homebrew
+   source ~/.zshrc  # 或 ~/.bash_profile，取决于您的 shell
+   # 或重新打开终端
+   ```
+
+2. **验证安装**
+   ```bash
+   claude --version
+   openspec list
+   ```
+
+3. **开始使用**
+   ```bash
+   claude
+   ```
+
+### Q8: 配置文件在哪里？
+
+**A:** 配置文件位置：
+- **Claude Code 配置**: `~/.claude/settings.json`
+- **Claude MCP 配置**: `~/.claude.json`
+- **项目 MCP 配置**: `{project_dir}/.mcp.json`
+
+### Q9: 如何使用国内镜像？
+
+**A:** 脚本在安装 Homebrew 时会询问是否使用国内镜像，选择 "Y" 即可。
+
+对于 npm，可以手动配置：
+```bash
+npm config set registry https://registry.npmmirror.com
+```
+
+### Q10: 脚本会覆盖现有配置吗？
+
+**A:** 脚本会：
+- 检测配置文件是否已存在
+- 如果存在，提示您选择覆盖或跳过
+- 如果选择覆盖，会自动备份现有配置
+
+### Q11: 如何配置 MCP 服务器？
+
+**A:** MCP 服务器配置需要手动添加：
+
+1. **全局 MCP 配置** (`~/.claude.json`):
+```json
+{
+  "mcpServers": {
+    "your-server-name": {
+      "command": "uv",
+      "args": ["--directory", "/path/to/your/mcp", "run", "server.py"]
+    }
+  }
+}
+```
+
+2. **项目 MCP 配置** (`{project_dir}/.mcp.json`):
+```json
+{
+  "mcpServers": {
+    "your-server-name": {
+      "command": "uv",
+      "args": ["--directory", "./project_mcp", "run", "server.py"]
+    }
+  }
+}
+```
+
+### Q12: 安装过程中遇到错误怎么办？
+
+**A:** 请查看错误信息，常见错误：
+
+1. **"command not found"** - 命令未找到
+   - 确保已正确安装依赖
+   - 检查 PATH 配置
+
+2. **"Permission denied"** - 权限被拒绝
+   - 检查文件权限
+   - 确保有足够的权限
+
+3. **"Network error"** - 网络错误
+   - 检查网络连接
+   - 尝试使用代理
+
+4. **"API Token invalid"** - API Token 无效
+   - 检查 API Token 是否正确
+   - 确认 Token 未过期
+
+### Q13: 如何获取帮助？
+
+**A:** 获取帮助的方式：
+- 查看本文档
+- 查看 Claude Code 官方文档
+- 查看 OpenSpec 官方文档
+- 在项目仓库提交 Issue
+
+---
+
+**提示**: 如果您遇到其他问题，请查看项目的 GitHub Issues 或提交新的 Issue。
